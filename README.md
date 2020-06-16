@@ -18,17 +18,17 @@ epel：epel-release-latest-7.noarch.rpm
 
 tar -xvf mysql-5.7.29-1.el7.x86_64.rpm-bundle.tar
 
-![image-20200616221432919](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616221432919.png)
+![image-20200616221432919](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616221432919.png)
 
 因为是centos环境，所以centos会默认安装mariadb数据库，需要查看是否存在，存在则卸载
 
 rpm -qa |grep mariadb
 
-![image-20200616221457668](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616221457668.png)
+![image-20200616221457668](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616221457668.png)
 
 rpm -e mariadb-libs-5.5.65-1.el7.x86_64 --nodeps
 
-![image-20200616221542099](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616221542099.png)
+![image-20200616221542099](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616221542099.png)
 
 
 
@@ -46,7 +46,7 @@ rpm -ivh mysql-community-server-5.7.29-1.el7.x86_64.rpm
 
 **在安装server时遇到第一个问题**有依赖没有安装
 
-![image-20200616221740843](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616221740843.png)
+![image-20200616221740843](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616221740843.png)
 
 既然有依赖没有被安装，那么我们就按照提示安装即可
 
@@ -66,7 +66,7 @@ mysqld --initialize --user=mysql
 
 cat /var/log/mysqld.log
 
-![image-20200616222606856](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616222606856.png)
+![image-20200616222606856](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616222606856.png)
 
 启动mysql服务
 
@@ -84,13 +84,13 @@ set password=password('root')
 
 systemctl stop iptables
 
-![image-20200616222718106](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616222718106.png)
+![image-20200616222718106](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616222718106.png)
 
 systemctl stop firewalld
 
 systemctl disable firewalld.service
 
-![image-20200616222729296](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616222729296.png)
+![image-20200616222729296](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616222729296.png)
 
 
 
@@ -128,7 +128,7 @@ flush privileges;
 show master status;
 ```
 
-![image-20200616223630248](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616223630248.png)
+![image-20200616223630248](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616223630248.png)
 
 slave数据库my.cnf配置
 
@@ -161,7 +161,7 @@ change master to master_host='192.168.230.129',master_port=3306,master_user='roo
 start slave;
 ```
 
-![image-20200616223857520](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616223857520.png)
+![image-20200616223857520](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616223857520.png)
 
 半同步
 
@@ -185,19 +185,19 @@ install plugin rpl_semi_sync_slave soname 'semisync_slave.so'
 set global rpl_semi_sync_slave_enabled=1;
 ```
 
-![image-20200616224250552](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616224250552.png)
+![image-20200616224250552](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616224250552.png)
 
 
 
 
 
-![image-20200616224334676](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616224334676.png)
+![image-20200616224334676](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616224334676.png)
 
-![image-20200616224500911](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616224500911.png)
+![image-20200616224500911](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616224500911.png)
 
 
 
-![image-20200616224929480](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616224929480.png)
+![image-20200616224929480](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616224929480.png)
 
 
 
@@ -224,7 +224,7 @@ CREATE TABLE position_detail (
 
 首先修改host，将四台主机加上
 
-![image-20200616232247206](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616232247206.png)
+![image-20200616232247206](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616232247206.png)
 
 
 
@@ -243,7 +243,7 @@ ssh-keygen -t rsa
 ssh-copy-id -i .ssh/id_rsa.pub root@node1
 ```
 
-![image-20200616233227558](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616233227558.png)
+![image-20200616233227558](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616233227558.png)
 
 
 
@@ -251,11 +251,11 @@ ssh-copy-id -i .ssh/id_rsa.pub root@node1
 
 cat authorized_keys 
 
-![image-20200616233344700](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616233344700.png)
+![image-20200616233344700](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616233344700.png)
 
 
 
-![image-20200616233821782](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616233821782.png)
+![image-20200616233821782](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616233821782.png)
 
 scp authorized_keys root@node2:~/.ssh/ 
 
@@ -273,7 +273,7 @@ yum install -y mha4mysql-manager-0.58-0.el7.centos.noarch.rpm
 
 安装manager组件是报错，可以看到缺少perl-Log-Dispatch
 
-![image-20200616234744918](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200616234744918.png)
+![image-20200616234744918](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200616234744918.png)
 
 如之前一样，缺什么安装什么。更新epel源，并安装perl-Log-Dispatch
 
@@ -319,27 +319,27 @@ candidate_master=1
 masterha_check_ssh -conf=/etc/mha_master/mha.cnf
 ```
 
-![image-20200617000355449](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200617000355449.png)
+![image-20200617000355449](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200617000355449.png)
 
 **这里有一个天坑**，mha应该是不认conf的空格，当配置后面有注释时，会报错
 
 
 
-![image-20200617000528883](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200617000528883.png)
+![image-20200617000528883](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200617000528883.png)
 
 需要将注释全部去掉
 
-![image-20200617013611013](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200617013611013.png)
+![image-20200617013611013](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200617013611013.png)
 
 检查管理的MySQL复制集群的连接配置参数是否OK
 
 masterha_check_repl -conf=/etc/mha_master/mha.cnf
 
-![image-20200617013948707](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200617013948707.png)
+![image-20200617013948707](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200617013948707.png)
 
 从库也需加给账号权限
 
-![image-20200617014808020](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200617014808020.png)
+![image-20200617014808020](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200617014808020.png)
 
 ```
 log-bin=mysql-bin
@@ -358,7 +358,7 @@ log_slave_updates = 1
 
 nohup masterha_manager -conf=/etc/mha_master/mha.cnf &> /etc/mha_master/manager.log &
 
-![image-20200617014940502](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200617014940502.png)
+![image-20200617014940502](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200617014940502.png)
 
 查看MHA状态
 
@@ -366,6 +366,8 @@ masterha_check_status -conf=/etc/mha_master/mha.cnf
 
 is running并显示当前master服务器
 
-![image-20200617023806227](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200617023806227.png)
+![image-20200617023806227](https://gitee.com/chenyuhua321/mysql-mha/raw/master/img/image-20200617023806227.png)
+
+
 
 ## 视频录像在video中，分为两部。一个未半自动同步讲解，一个为MHA讲解
